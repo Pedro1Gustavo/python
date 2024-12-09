@@ -1,19 +1,14 @@
 vendas = {
-    "produto1": 50,  
-    "produto2": 75,  
-    "produto3": 75,  
-    "produto4": 30,  
-    "produto5": 90   
+    'produto_a': [10, 20, 30],
+    'produto_b': [5, 15, 25],
+    'produto_c': [30, 10, 10],
 }
 
+somas_vendas = {produto: sum(vendas[produto]) for produto in vendas}
 
-def produto_mais_vendido(dicionario):
-    
-    max_vendas = max(dicionario.values())
-    
-    produtos_mais_vendidos = [produto for produto, vendas in dicionario.items() if vendas == max_vendas]
-    
-    return produtos_mais_vendidos, max_vendas
+max_vendas = max(somas_vendas.values())
 
-produtos_resultado, vendas_max = produto_mais_vendido(vendas)
-print(f"Produto(s) mais vendido(s): {produtos_resultado} com {vendas_max} unidades vendidas.")
+produtos_mais_vendidos = [produto for produto, soma in somas_vendas.items() if soma == max_vendas]
+
+print("Produto(s) mais vendido(s):", produtos_mais_vendidos)
+print("Total de vendas:", max_vendas)
