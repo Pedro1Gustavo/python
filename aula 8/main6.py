@@ -1,13 +1,8 @@
-def contar_pares_e_impares(lista):
-    
-    pares = sum(1 for num in lista if num % 2 == 0)
-    
-    impares = len(lista) - pares
-    
-    return pares, impares
+numeros = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
 
-lista_numeros = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+quantidade_pares = len(list(filter(lambda x: x % 2 == 0, numeros)))
 
-pares, impares = contar_pares_e_impares(lista_numeros)
-print(f"Números pares: {pares}")
-print(f"Números ímpares: {impares}")
+quantidade_impares = len(list(filter(lambda x: x % 2 != 0, numeros)))
+
+print("Quantidade de números pares:", quantidade_pares)
+print("Quantidade de números ímpares:", quantidade_impares)
