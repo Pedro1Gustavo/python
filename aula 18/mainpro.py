@@ -1,11 +1,11 @@
 import sqlite3
 import datetime
 
-# Função para conexão com o banco de dados utilizando context manager
+
 def get_db_connection():
     return sqlite3.connect('estoque.db')
 
-# Função para criar o banco de dados e as tabelas necessárias
+
 def criar_banco():
     with get_db_connection() as conn:
         cursor = conn.cursor()
@@ -29,10 +29,10 @@ def criar_banco():
             )
         ''')
 
-# Chamando a função para criar as tabelas
+
 criar_banco()
 
-# Classe Produto para manipulação dos produtos no banco de dados
+
 class Produto:
     def __init__(self, id=None, nome=None, descricao=None, quantidade_disponivel=0, preco=0.0):
         self.id = id
@@ -77,7 +77,7 @@ class Produto:
             cursor = conn.cursor()
             cursor.execute('DELETE FROM produtos WHERE id = ?', (produto_id,))
 
-# Classe Venda para registrar as vendas no banco de dados
+
 class Venda:
     def __init__(self, id=None, id_produto=None, quantidade_vendida=0, data_venda=None):
         self.id = id
@@ -100,15 +100,13 @@ class Venda:
             cursor.execute('SELECT * FROM vendas')
             return cursor.fetchall()
 
-# Funções auxiliares para as operações do sistema
 
-# Cadastrar um novo produto
 def cadastrar_produto(nome, descricao, quantidade, preco):
     produto = Produto(nome=nome, descricao=descricao, quantidade_disponivel=quantidade, preco=preco)
     produto.salvar()
     print(f'Produto "{nome}" cadastrado com sucesso.')
 
-# Listar todos os produtos cadastrados
+
 def listar_produtos():
     produtos = Produto.consultar_todos()
     if produtos:
@@ -117,7 +115,7 @@ def listar_produtos():
     else:
         print("Nenhum produto encontrado.")
 
-# Atualizar a quantidade de um produto específico
+
 def atualizar_quantidade(produto_id, quantidade):
     produto = Produto.consultar_por_id(produto_id)
     if produto:
@@ -132,12 +130,12 @@ def atualizar_quantidade(produto_id, quantidade):
     else:
         print("Produto não encontrado.")
 
-# Remover um produto
+
 def remover_produto(produto_id):
     Produto.remover(produto_id)
     print(f"Produto com ID {produto_id} removido com sucesso.")
 
-# Registrar uma venda de produto
+
 def registrar_venda(id_produto, quantidade_vendida):
     produto = Produto.consultar_por_id(id_produto)
     if produto:
@@ -152,24 +150,23 @@ def registrar_venda(id_produto, quantidade_vendida):
     else:
         print("Produto não encontrado.")
 
-# Teste de funcionalidades
-# Cadastrar produtos
+
 cadastrar_produto('Camiseta', 'Camiseta de algodão', 50, 29.99)
 cadastrar_produto('Calça', 'Calça jeans', 30, 79.99)
 
-# Listar produtos
+
 listar_produtos()
 
-# Registrar uma venda
+
 registrar_venda(1, 5)
 
-# Listar produtos após a venda
+
 listar_produtos()
 
-# Remover um produto
-remover_produto(2)
 
-# Listar produtos após a remoção
+remover_produto(4)
+
+
 listar_produtos()
 
 
